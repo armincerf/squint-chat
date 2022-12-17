@@ -1,0 +1,8 @@
+query pixelGrids {
+  pixelGrids {
+    pixelString
+    user
+    id
+  }
+}
+

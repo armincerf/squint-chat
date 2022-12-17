@@ -1,0 +1,13 @@
+mutation insertComment {
+  insert_comments_one(object: {comment: "test"}) {
+    id
+  }
+}
+
+query GetComments {
+  comments {
+    id
+    user
+    comment
+  }
+}
