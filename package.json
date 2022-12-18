@@ -8,6 +8,7 @@
     "watch-cljs": "ls src/*.cljs | entr -s 'squint src/*.cljs'",
     "watch-dev": "vite",
     "dev": "concurrently \"yarn:watch-*\"",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "build": "vite build",
     "serve": "vite preview"
   },
@@ -19,7 +20,22 @@
     "@vitejs/plugin-react": "^3.0.0",
     "concurrently": "^7.6.0",
     "squint-cljs": "0.0.1",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-functional": "^4.4.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-jsdoc": "^0.4.2"
   },
   "dependencies": {
     "@clerk/clerk-react": "^4.6.4",

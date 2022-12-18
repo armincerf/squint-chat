@@ -1,7 +1,7 @@
 export const useFetchData = <TData, TVariables>(
   query: string,
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const url = 'https://squint-test.hasura.app/v1/graphql'
+  const url = 'https://squint-test.hasura.app/v1/graphql';
   return async (variables?: TVariables) => {
     const res = await fetch(url, {
       method: 'POST',

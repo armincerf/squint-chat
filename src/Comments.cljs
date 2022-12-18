@@ -17,29 +17,33 @@
   {:onSuccess (fn [] (.invalidateQueries query-client "getComments"))})
 
 (defn Comments []
-  (let [queryResponse (useGetCommentsQuery)
+  (let [{:keys [data isLoading isFetching]} (useGetCommentsQuery)
         queryClient (useQueryClient)
         {:keys [mutate]} (useDeleteCommentByIdMutation (mutation-on-success queryClient))
-        comments (:comments (:data queryResponse))]
+        comments (:comments data)]
     #jsx [:div
           [:h1 "Comments"]
+          (when isFetching #jsx [:h2 "fetching"])
           [:div
-           (map (fn [comment]
-                  #jsx [:div
-                        {:key (:id comment)}
-                        [Button {:onClick (fn [] (mutate {:id (:id comment)}))} "Delete"]
-                        [:p (:comment comment)]
-                        [:p "by -" (:user comment)]]) comments)]]))
+           (if isLoading
+             #jsx [:h1 "Loading"]
+             (map (fn [comment]
+                    #jsx [:div
+                          {:key (:id comment)}
+                          [Button {:onClick (fn [] (mutate {:id (:id comment)}))} "Delete"]
+                          [:p (:comment comment)]
+                          [:p "by -" (:user comment)]]) comments))]]))
 
 (defn AddComment []
   (let [{:keys [user]} (useUser)
-        {:keys [register handleSubmit]} (useForm)
+        {:keys [register handleSubmit reset]} (useForm)
         {:keys [ref onChange onBlur name] :as props} (register "test")
         queryClient (useQueryClient)
         {:keys [mutate]} (useAddCommentMutation (mutation-on-success queryClient))
 
         on-submit (fn [data]
                     (js/console.log "data" data (register "test"))
+                    (reset)
                     (mutate {:object {:comment (:test data)
                                       :user (:id user)}}))]
     #jsx [Box {:component "form"

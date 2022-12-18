@@ -1,16 +1,20 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import App from './App';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import {
   PersistedClient,
   Persister,
   persistQueryClient,
 } from '@tanstack/react-query-persist-client';
-import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import {
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from '@clerk/clerk-react';
 import { get, set, del } from 'idb-keyval';
+import { App } from './App';
 
 const frontendApi = import.meta.env.VITE_APP_CLERK_FRONTEND_API;
 
@@ -35,7 +39,7 @@ export function createIDBPersister(idbValidKey: IDBValidKey = 'tbSpecialist') {
 }
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
+const root = createRoot(container);
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

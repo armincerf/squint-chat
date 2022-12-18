@@ -1,0 +1,9 @@
+/dist
+*.scss
+*.jsx
+*.css
+*.cljs
+/node_modules
+/build
+.eslintrc.js
+src/generated/*
