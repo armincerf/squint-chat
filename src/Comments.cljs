@@ -7,13 +7,19 @@
    ["@mui/material/Button$default" :as Button]
    ["@clerk/clerk-react" :refer [useUser]]
    ["@mui/Material/Box$default" :as Box]
-   ["./generated/graphql" :refer [useGetCommentsQuery useAddCommentMutation]]))
+   ["./generated/graphql" :refer [useGetCommentsQuery useAddCommentMutation useDeleteCommentByIdMutation]]))
 
 ;; hack until booleans work properly 
 (def t (= 1 1))
 
+(defn mutation-on-success
+  [query-client]
+  {:onSuccess (fn [] (.invalidateQueries query-client "getComments"))})
+
 (defn Comments []
   (let [queryResponse (useGetCommentsQuery)
+        queryClient (useQueryClient)
+        {:keys [mutate]} (useDeleteCommentByIdMutation (mutation-on-success queryClient))
         comments (:comments (:data queryResponse))]
     #jsx [:div
           [:h1 "Comments"]
@@ -21,6 +27,7 @@
            (map (fn [comment]
                   #jsx [:div
                         {:key (:id comment)}
+                        [Button {:onClick (fn [] (mutate {:id (:id comment)}))} "Delete"]
                         [:p (:comment comment)]
                         [:p "by -" (:user comment)]]) comments)]]))
 
@@ -29,9 +36,8 @@
         {:keys [register handleSubmit]} (useForm)
         {:keys [ref onChange onBlur name] :as props} (register "test")
         queryClient (useQueryClient)
-        {:keys [mutate]} (useAddCommentMutation
-                          {:onSuccess (fn []
-                                        (.invalidateQueries queryClient queryClient "getComments"))})
+        {:keys [mutate]} (useAddCommentMutation (mutation-on-success queryClient))
+
         on-submit (fn [data]
                     (js/console.log "data" data (register "test"))
                     (mutate {:object {:comment (:test data)

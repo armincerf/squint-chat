@@ -11,3 +11,9 @@ query GetComments {
     comment
   }
 }
+
+mutation deleteCommentById($id: Int!) {
+  delete_comments_by_pk(id: $id) {
+    id
+  }
+}

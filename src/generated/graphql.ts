@@ -49,6 +49,22 @@ useGetCommentsQuery.document = GetCommentsDocument;
 useGetCommentsQuery.getKey = (variables?: GetCommentsQueryVariables) => variables === undefined ? ['GetComments'] : ['GetComments', variables];
 ;
 
+export const DeleteCommentByIdDocument = `
+    mutation deleteCommentById($id: Int!) {
+  delete_comments_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export const useDeleteCommentByIdMutation = <
+      TError = Error,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteCommentByIdMutation, TError, DeleteCommentByIdMutationVariables, TContext>) =>
+    useMutation<DeleteCommentByIdMutation, TError, DeleteCommentByIdMutationVariables, TContext>(
+      ['deleteCommentById'],
+      useFetchData<DeleteCommentByIdMutation, DeleteCommentByIdMutationVariables>(DeleteCommentByIdDocument),
+      options
+    );
 export const PixelGridsDocument = `
     query pixelGrids {
   pixelGrids {
@@ -855,6 +871,13 @@ export type GetCommentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', id: number, user?: string | null, comment: string }> };
+
+export type DeleteCommentByIdMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteCommentByIdMutation = { __typename?: 'mutation_root', delete_comments_by_pk?: { __typename?: 'comments', id: number } | null };
 
 export type PixelGridsQueryVariables = Exact<{ [key: string]: never; }>;
 
