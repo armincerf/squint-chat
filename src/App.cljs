@@ -1,34 +1,12 @@
 (ns App
   (:require ["./App.css$default" :as styles]
             ["react" :as react]
-            ["./generated/graphql" :refer [useGetCommentsQuery usePixelGridsQuery]]
+            ["./generated/graphql" :refer [usePixelGridsQuery]]
+            ["./Comments" :refer [Comments AddComment]]
             ["@mui/Material/Box$default" :as Box]
             ["@mui/material/Button$default" :as Button]
             ["@mui/material/Avatar$default" :as Avatar]
-            ["@clerk/clerk-react" :refer [useUser]]
-            [squint.string :as str]))
-
-(defn Counter [{:keys [init]}]
-  (let [[counter setCount] (react/useState init)]
-    #jsx [:div
-          "Count:" (str/join " " (range counter))
-          [:div
-           [Button
-            {:onClick (fn []
-                        (setCount (inc counter)))}
-            "Click me"]]]))
-
-(defn Comments []
-  (let [queryResponse (useGetCommentsQuery)
-        comments (:comments (:data queryResponse))]
-    #jsx [:div
-          [:h1 "Comments"]
-          [:div
-           (map (fn [comment]
-                  #jsx [:div
-                        {:key (:id comment)}
-                        [:p (:comment comment)]
-                        [:p "by -" (:user comment)]]) comments)]]))
+            ["@clerk/clerk-react" :refer [useUser]]))
 
 (defn RenderGrid
   []
@@ -54,8 +32,7 @@
                                     ""]) row)]) pixel-vector)]))
 
 (defn App []
-  (let [[count setCount] (react/useState 0)
-        {:keys [user]} (useUser)]
+  (let [{:keys [user]} (useUser)]
     #jsx [:div {:className styles.App}
           [Box {:sx {:display "flex"
                      :flexDirection "column"
@@ -67,13 +44,10 @@
             {:alt (:firstName user)
              :src (:profileImageUrl user)
              :style {:width "100px"
-                     :height "100px"}
-             :onClick (fn []
-                        (setCount (inc count)))}]]
+                     :height "100px"}}]]
           [Comments]
-          [RenderGrid]
-          [Button {:onClick (fn [] (setCount (inc count)))}
-           "count is"  count]]))
+          [AddComment]
+          [RenderGrid]]))
 
 (def default App)
 

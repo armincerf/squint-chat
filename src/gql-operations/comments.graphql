@@ -1,5 +1,5 @@
-mutation insertComment {
-  insert_comments_one(object: {comment: "test"}) {
+mutation addComment($object: comments_insert_input!) {
+  insert_comments_one(object: $object) {
     id
   }
 }

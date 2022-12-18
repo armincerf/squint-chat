@@ -6,20 +6,20 @@ export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K]
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 
-export const InsertCommentDocument = `
-    mutation insertComment {
-  insert_comments_one(object: {comment: "test"}) {
+export const AddCommentDocument = `
+    mutation addComment($object: comments_insert_input!) {
+  insert_comments_one(object: $object) {
     id
   }
 }
     `;
-export const useInsertCommentMutation = <
+export const useAddCommentMutation = <
       TError = Error,
       TContext = unknown
-    >(options?: UseMutationOptions<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>) =>
-    useMutation<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>(
-      ['insertComment'],
-      useFetchData<InsertCommentMutation, InsertCommentMutationVariables>(InsertCommentDocument),
+    >(options?: UseMutationOptions<AddCommentMutation, TError, AddCommentMutationVariables, TContext>) =>
+    useMutation<AddCommentMutation, TError, AddCommentMutationVariables, TContext>(
+      ['addComment'],
+      useFetchData<AddCommentMutation, AddCommentMutationVariables>(AddCommentDocument),
       options
     );
 export const GetCommentsDocument = `
@@ -844,10 +844,12 @@ export type Subscription_RootPixelGrids_StreamArgs = {
   where?: InputMaybe<PixelGrids_Bool_Exp>;
 };
 
-export type InsertCommentMutationVariables = Exact<{ [key: string]: never; }>;
+export type AddCommentMutationVariables = Exact<{
+  object: Comments_Insert_Input;
+}>;
 
 
-export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: number } | null };
+export type AddCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: number } | null };
 
 export type GetCommentsQueryVariables = Exact<{ [key: string]: never; }>;
 

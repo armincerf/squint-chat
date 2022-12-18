@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "watch-graphql": "graphql-codegen --watch",
-    "watch-cljs": "ls src/*.cljs | entr -s 'squint src/App.cljs'",
+    "watch-cljs": "ls src/*.cljs | entr -s 'squint src/*.cljs'",
     "watch-dev": "vite",
     "dev": "concurrently \"yarn:watch-*\"",
     "build": "vite build",
@@ -34,6 +34,7 @@
     "idb-keyval": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.0",
     "typescript": "^4.9.4"
   }
 }
