@@ -7,7 +7,7 @@
    ["@mui/material/TextField$default" :as TextField]
    ["@mui/material/Button$default" :as Button]
    ["@clerk/clerk-react" :refer [useUser]]
-   ["@mui/Material/Box$default" :as Box]
+   ["@mui/material/Box$default" :as Box]
    ["./generated/graphql" :refer [useGetCommentsQuery useAddCommentMutation useDeleteCommentByIdMutation]]))
 
 (defonce active-mutations (atom 0))
@@ -67,7 +67,7 @@
         comments (:comments data)]
     (useCommentsStream)
     #jsx [:div
-          [:h1 "What animal says - 'bua bua'"]
+          [:h1 "What animal says - 'nyan'"]
           [:h2 "Today's guesses"]
           [:div
            (if isLoading

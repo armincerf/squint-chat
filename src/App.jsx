@@ -1,11 +1,7 @@
-import {  } from './App.css'
-import {  } from 'react'
-import {  } from '@mui/Material/Box'
-import {  } from '@mui/material/Avatar'
 import { get } from 'squint-cljs/core.js'
 import styles from './App.css';
 import { Comments, AddComment } from './Comments';
-import Box from '@mui/Material/Box';
+import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { useUser } from '@clerk/clerk-react';
 var App = function () {

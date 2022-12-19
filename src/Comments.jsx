@@ -1,7 +1,4 @@
 import { useEffect as react_useEffect, useRef as react_useRef } from 'react'
-import {  } from '@mui/material/TextField'
-import {  } from '@mui/material/Button'
-import {  } from '@mui/Material/Box'
 import { zero_QMARK_, atom, dec, map, remove, conj, get, into, some, swap_BANG_, merge, inc, filter, str, deref } from 'squint-cljs/core.js'
 import { useForm } from 'react-hook-form';
 import { useSubscription } from './utils/hooks';
@@ -9,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useUser } from '@clerk/clerk-react';
-import Box from '@mui/Material/Box';
+import Box from '@mui/material/Box';
 import { useGetCommentsQuery, useAddCommentMutation, useDeleteCommentByIdMutation } from './generated/graphql';
 if ((typeof active_mutations !== 'undefined')) {
 null} else {
@@ -77,7 +74,7 @@ return queryClient20.setQueryData(get_comments_key, get(context, "previous-data"
 let mutate31 = get(map__1621, "mutate");
 let comments32 = get(data18, "comments");
 useCommentsStream();
-return <div><h1>What animal says - 'bua bua'</h1> <h2>Today's guesses</h2> <div>{(isLoading19) ? (<h1>Loading</h1>) : (map(function (comment) {
+return <div><h1>What animal says - 'nyan'</h1> <h2>Today's guesses</h2> <div>{(isLoading19) ? (<h1>Loading</h1>) : (map(function (comment) {
 return <div key={JSON.stringify(comment)}><Button onClick={function () {
 return mutate31(({ "id": get(comment, "id") }));
 }}>Delete</Button> <p>{get(comment, "comment")}</p> <p>{get(comment, "createdAt")}</p> <p>by - {get(comment, "user")}</p></div>;
