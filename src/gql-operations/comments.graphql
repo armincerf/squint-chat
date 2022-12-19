@@ -9,6 +9,7 @@ query GetComments {
     id
     user
     comment
+    createdAt
   }
 }
 

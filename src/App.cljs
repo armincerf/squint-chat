@@ -1,10 +1,8 @@
 (ns App
   (:require ["./App.css$default" :as styles]
             ["react" :as react]
-            ["./generated/graphql" :refer [usePixelGridsQuery]]
             ["./Comments" :refer [Comments AddComment]]
             ["@mui/Material/Box$default" :as Box]
-            ["@mui/material/Button$default" :as Button]
             ["@mui/material/Avatar$default" :as Avatar]
             ["@clerk/clerk-react" :refer [useUser]]))
 

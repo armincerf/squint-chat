@@ -3301,7 +3301,7 @@ graphql-tag@^2.11.0:
   dependencies:
     tslib "^2.1.0"
 
-graphql-ws@5.11.2:
+graphql-ws@5.11.2, graphql-ws@^5.11.2:
   version "5.11.2"
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.11.2.tgz#d5e0acae8b4d4a4cf7be410a24135cfcefd7ddc0"
   integrity sha512-4EiZ3/UXYcjm+xFGP544/yW1+DVI8ZpKASFbzrV5EDTFWJp0ZvLl4Dy2fSZAzz9imKp5pZMIcjB0x/H69Pv/6w==
@@ -4998,10 +4998,10 @@ sponge-case@^1.0.1:
   dependencies:
     tslib "^2.0.3"
 
-squint-cljs@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/squint-cljs/-/squint-cljs-0.0.1.tgz#8b2c48660098662e55748d962b02be719e12166a"
-  integrity sha512-z85Rk4Sr3NIFM/cpTKG68PqWgtjH/gLbVNYO+/sf+GDX6yl+ssa/HJS7lAiXJD2WGknjKlFTxyA/sKgcmQRcxQ==
+squint-cljs@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/squint-cljs/-/squint-cljs-0.0.4.tgz#0685a1b609dbf3a4333d79503e91f8af96829b3f"
+  integrity sha512-xRuM4LBROkCykvZy+eIxrMPJvHZqE78Bg0+RkzogmyRNRr3uOQAXzekaI1j090T0c9jP/L845j0EViMNH7WyJw==
 
 streamsearch@^1.1.0:
   version "1.1.0"
