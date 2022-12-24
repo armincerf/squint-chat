@@ -1359,6 +1359,27 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@liveblocks/client@0.19.2", "@liveblocks/client@^0.19.2":
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/@liveblocks/client/-/client-0.19.2.tgz#622ff87bb1ec6648ed0ddc183b8695d4d8248e90"
+  integrity sha512-z4OLKet8n0KcmQLtDfuDmkZuGEfxPDI6lxc0Qt5Dl65f1jN4tb8FCiB8+0GIYpl2HOgI8WH/ptFT95EFGYRg3A==
+  dependencies:
+    "@liveblocks/core" "0.19.2"
+
+"@liveblocks/core@0.19.2":
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/@liveblocks/core/-/core-0.19.2.tgz#18c2fd8e30db383a0058a0ee5b2275762e23c6bf"
+  integrity sha512-/gLT7kA8AMzaNKMEruOMmTmcNbuPre2bnJT+K8ecGWpNsKJsnY4kfobfMrSrLSn9Qvi4OiHpa6DahjRZ8Hx2JA==
+
+"@liveblocks/react@^0.19.2":
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/@liveblocks/react/-/react-0.19.2.tgz#e7cb68498e122e1d0fa8419c46214f812c40b6ac"
+  integrity sha512-o7Pfxb7oieki63lhIT/1Jj+sODaVg3K+/gmowDOE53ebUz16RyR5m/DMgZm+qsoikDQF5Vdv0oTt9hYPuaj7rw==
+  dependencies:
+    "@liveblocks/client" "0.19.2"
+    "@liveblocks/core" "0.19.2"
+    use-sync-external-store "^1.2.0"
+
 "@mui/base@5.0.0-alpha.110":
   version "5.0.0-alpha.110"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.110.tgz#61174f64b23e667387708b2cbb31339e58c714cf"
@@ -4998,10 +5019,10 @@ sponge-case@^1.0.1:
   dependencies:
     tslib "^2.0.3"
 
-squint-cljs@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/squint-cljs/-/squint-cljs-0.0.4.tgz#0685a1b609dbf3a4333d79503e91f8af96829b3f"
-  integrity sha512-xRuM4LBROkCykvZy+eIxrMPJvHZqE78Bg0+RkzogmyRNRr3uOQAXzekaI1j090T0c9jP/L845j0EViMNH7WyJw==
+squint-cljs@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/squint-cljs/-/squint-cljs-0.0.5.tgz#477ac75f2bed7978a0b732a9907f227f9a358740"
+  integrity sha512-nPN3b2hxs/FytUAusf+2yDdqUuMdkaqFkm/Wt9H53PQN/wsQlfw8Nu8/EjflSzSkYO1H/LW30NPZO1dUHXgFWg==
 
 streamsearch@^1.1.0:
   version "1.1.0"

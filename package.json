@@ -34,13 +34,15 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.7.1",
     "prettier-plugin-jsdoc": "^0.4.2",
-    "squint-cljs": "0.0.4",
+    "squint-cljs": "0.0.5",
     "vite": "^4.0.0"
   },
   "dependencies": {
     "@clerk/clerk-react": "^4.6.4",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@liveblocks/client": "^0.19.2",
+    "@liveblocks/react": "^0.19.2",
     "@mui/material": "^5.11.0",
     "@tanstack/react-query": "^4.20.4",
     "@tanstack/react-query-devtools": "^4.20.4",

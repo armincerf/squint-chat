@@ -35,7 +35,8 @@
                                           {:comments (into current new)})))
                        (.invalidateQueries query-client get-comments-key)))
         now-string (.toISOString (js/Date.))]
-    (useSubscription {:operation (str "subscription comments { comments_stream(batch_size: 5, cursor: {initial_value: {createdAt: \""
+    (useSubscription {:operation (str "subscription comments {"
+                                      "comments_stream(batch_size: 5, cursor: {initial_value: {createdAt: \""
                                       now-string
                                       "\"}}) { id comment createdAt user } } ")
                       :onMessage on-message
@@ -45,6 +46,7 @@
 (defn Comments []
   (let [{:keys [data isLoading]} (useGetCommentsQuery)
         queryClient (useQueryClient)
+        {:keys [user]} (useUser)
         {:keys [mutate]} (useDeleteCommentByIdMutation
                           (merge
                            {:onMutate
@@ -64,20 +66,27 @@
                             (fn [_err _new context]
                               (.setQueryData queryClient get-comments-key (:previous-data context)))}
                            (mutation-on-settled queryClient)))
-        comments (:comments data)]
+        comments (:comments data)
+        timestamp-formatted (fn [timestamp]
+                              (when timestamp
+                                (let [date (js/Date. timestamp)]
+                                  (.toLocaleString date "en-US"  {:month "short"
+                                                                  :day "numeric"
+                                                                  :hour "numeric"
+                                                                  :minute "numeric"}))))]
     (useCommentsStream)
     #jsx [:div
-          [:h1 "What animal says - 'nyan'"]
-          [:h2 "Today's guesses"]
+          [:h2 "Chat room"]
           [:div
            (if isLoading
              #jsx [:h1 "Loading"]
              (map (fn [comment]
                     #jsx [:div
                           {:key (js/JSON.stringify comment)}
-                          [Button {:onClick (fn [] (mutate {:id (:id comment)}))} "Delete"]
+                          (when (= (:user comment) (:id user))
+                            #jsx [Button {:onClick (fn [] (mutate {:id (:id comment)}))} "Delete"])
                           [:p (:comment comment)]
-                          [:p (:createdAt comment)]
+                          [:p (timestamp-formatted (:createdAt comment))]
                           [:p "by -" (:user comment)]]) comments))]]))
 
 (defn useAddInputListener
@@ -104,7 +113,7 @@
 (defn AddComment []
   (let [{:keys [user]} (useUser)
         {:keys [register handleSubmit reset]} (useForm)
-        {:keys [ref onChange onBlur name]} (register "test")
+        {:keys [ref] :as registerProps} (register "test")
         queryClient (useQueryClient)
         {:keys [mutate]} (useAddCommentMutation
                           (merge
@@ -115,7 +124,10 @@
                                 (.setQueryData queryClient get-comments-key
                                                (fn [{:keys [comments]}]
                                                  {:comments
-                                                  (conj comments object)}))
+                                                  (conj comments
+                                                        (assoc object
+                                                               :createdAt
+                                                               (.toISOString (js/Date.))))}))
                                 (swap! active-mutations inc)
                                 {:previous-data previous-data}))
                             :onError
@@ -127,21 +139,19 @@
         on-submit (fn [data]
                     (reset)
                     (mutate {:object {:comment (:test data)
-                                      :user (:id user)}}))
-        _ (useAddInputListener input-ref (handleSubmit on-submit))]
+                                      :user (:id user)}}))]
+
+    (useAddInputListener input-ref (handleSubmit on-submit))
+
     #jsx [Box {:component "form"
                :onSubmit (handleSubmit on-submit)}
-          [:p @active-mutations]
-          ;; can't use a var as props yet...
           [TextField {:inputRef (fn [e]
                                   (set! (.-current input-ref) e)
                                   (ref e))
-                      :onChange onChange
-                      :onBlur onBlur
                       :multiline true
                       :rows 4
-                      :name name
                       :label "Comment"
                       :variant "outlined"
-                      :sx {:mb 2}}]
-          [Button {:type "submit"} "Guess the animal"]]))
+                      :sx {:mb 2}
+                      :& registerProps}]
+          [Button {:type "submit"} "Send"]]))

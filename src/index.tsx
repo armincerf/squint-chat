@@ -13,33 +13,12 @@ import {
   SignedIn,
   SignedOut,
 } from '@clerk/clerk-react';
-import { get, set, del } from 'idb-keyval';
 import { App } from './App';
 
 const frontendApi = import.meta.env.VITE_APP_CLERK_FRONTEND_API;
 
-/**
- * Creates an Indexed DB persister
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
- */
-export function createIDBPersister(idbValidKey: IDBValidKey = 'tbSpecialist') {
-  return {
-    persistClient: async (client: PersistedClient) => {
-      set(idbValidKey, client);
-    },
-    restoreClient: async () => {
-      const client = await get<PersistedClient>(idbValidKey);
-      return client;
-    },
-    removeClient: async () => {
-      await del(idbValidKey);
-    },
-  } as Persister;
-}
-
 const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(container!);
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -47,11 +26,6 @@ const queryClient = new QueryClient({
       retry: false,
     },
   },
-});
-
-persistQueryClient({
-  persister: createIDBPersister(),
-  queryClient,
 });
 
 root.render(
