@@ -1,6 +1,5 @@
 (ns App
-  (:require ["./App.css$default" :as styles]
-            ["react" :as react]
+  (:require ["react" :as react]
             ["./Comments" :refer [Comments AddComment]]
             ["@mui/material/Box$default" :as Box]
             ["@mui/material/Avatar$default" :as Avatar]
@@ -8,7 +7,9 @@
             ["@clerk/clerk-react" :refer [useUser]]))
 
 (defn App []
-  (let [{:keys [user]} (useUser)]
+  (let [{:keys [user]} (useUser)
+        propsa {:a 1 :b 2}
+        propsb {:c 3 :d 4}]
     #jsx [Box {:sx {:display "flex"
                     :flexDirection "column"
                     :alignItems "center"
@@ -20,6 +21,7 @@
                  :alignItems "center"
                  :justifyContent "center"
                  :width "100%"}}
+           [:button {:& propsa}]
            [Typography {:variant "h1"} "Hello, " (:firstName user)]
            [Avatar
             {:alt (:firstName user)
