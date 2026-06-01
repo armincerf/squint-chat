@@ -1,5 +1,6 @@
 import {  } from './App.css'
 import {  } from 'react'
+import { request_notification_permission as notifs_request_notification_permission, show_notification as notifs_show_notification } from './Notifications'
 import {  } from '@mui/material/Box'
 import {  } from '@mui/material/Avatar'
 import {  } from '@mui/material/Typography'
@@ -13,7 +14,12 @@ import { useUser } from '@clerk/clerk-react';
 var App = function () {
 let map__12 = useUser();
 let user3 = get(map__12, "user");
-return <Box sx={({ "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "center" })}><Box sx={({ "display": "flex", "flexDirection": "row", "gap": "1rem", "alignItems": "center", "justifyContent": "center", "width": "100%" })}><Typography variant="h1">Hello,  {get(user3, "firstName")}</Typography> <Avatar alt={get(user3, "firstName")} src={get(user3, "profileImageUrl")} style={({ "width": "100px", "height": "100px" })}></Avatar></Box> <Comments></Comments> <AddComment></AddComment></Box>;
+return <Box sx={({ "display": "flex", "flexDirection": "column", "alignItems": "center", "justifyContent": "center" })}><Box sx={({ "display": "flex", "flexDirection": "row", "gap": "1rem", "alignItems": "center", "justifyContent": "center", "width": "100%" })}><Typography variant="h1">Hello,  {get(user3, "firstName")}</Typography> <Avatar alt={get(user3, "firstName")} src={get(user3, "profileImageUrl")} style={({ "width": "100px", "height": "100px" })}></Avatar></Box> <Comments></Comments> <AddComment></AddComment> <button onClick={function () {
+notifs_request_notification_permission();
+return setTimeout(function () {
+return notifs_show_notification("hello", "body");
+}, 1000);
+}}></button></Box>;
 }
 ;
 

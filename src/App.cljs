@@ -2,6 +2,7 @@
   (:require ["./App.css$default" :as styles]
             ["react" :as react]
             ["./Comments" :refer [Comments AddComment]]
+            ["./Notifications" :as notifs]
             ["@mui/material/Box$default" :as Box]
             ["@mui/material/Avatar$default" :as Avatar]
             ["@mui/material/Typography$default" :as Typography]
@@ -27,4 +28,7 @@
              :style {:width "100px"
                      :height "100px"}}]]
           [Comments]
-          [AddComment]]))
+          [AddComment]
+          [:button {:onClick #(do (notifs/request-notification-permission)
+                                  (js/setTimeout (fn [] (notifs/show-notification "hello" "body")) 1000))}]]))
+
